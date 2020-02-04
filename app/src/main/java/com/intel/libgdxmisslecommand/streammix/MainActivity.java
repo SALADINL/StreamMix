@@ -1,12 +1,15 @@
 package com.intel.libgdxmisslecommand.streammix;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -21,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "Shodream";
 
     private ImageButton btnReco;
+    private ConstraintLayout mainLayout;
     private Recorder recorder = new Recorder();
 
     @SuppressLint("ClickableViewAccessibility")
@@ -33,16 +37,22 @@ public class MainActivity extends AppCompatActivity {
         mkdirTest();
 
         btnReco = findViewById(R.id.btn_reco);
+        mainLayout = findViewById(R.id.mainLayout);
+        final TransitionDrawable transition = (TransitionDrawable) mainLayout.getBackground();
 
         btnReco.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch(event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
+                        btnReco.setSelected(true);
+                        transition.startTransition(500);
                         Log.d(TAG, "down");
                         recorder.startRecording();
                         return true; // if you want to handle the touch event
                     case MotionEvent.ACTION_UP:
+                        btnReco.setSelected(false);
+                        transition.reverseTransition(1000);
                         Log.d(TAG, "up");
                         recorder.stopRecording();
                         return true; // if you want to handle the touch event
