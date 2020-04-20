@@ -1,6 +1,5 @@
 package com.intel.libgdxmisslecommand.streammix;
 
-import android.widget.VideoView;
 
 public class Stream implements Runnable {
 

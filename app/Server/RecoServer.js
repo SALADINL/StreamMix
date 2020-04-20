@@ -12,9 +12,10 @@ app.post('/', async function(req,res) {
     let filename = "input.wav";
     let dataWav = req.body.wav;
 
+    if(dataWav != null) console.log("Wav present !");
+
     let transcription = await main(dataWav);
 
-    console.log(transcription);
     res.send(transcription);
 
     res.on('finish', function() {
@@ -53,6 +54,7 @@ async function main(dataWav) {
     encoding: 'LINEAR16',
     sampleRateHertz: 16000,
     languageCode: 'fr-FR',
+    alternativeLanguageCodes : ['fr-FR', 'en-US']
   };
   const request = {
     audio: audio,
@@ -80,7 +82,7 @@ function saveFile(buffer, nameFile) {
   });
 }
 
-/** Permet de supprimer les wav contenu sur le serveur **/
+/** Permet de supprimer la wav contenu sur le serveur **/
 function removeFile(listnameFile) {
-  listnameFile.forEach(element => fs.unlinkSync(PATH+element+".wav"))
+    fs.unlinkSync("input.wav")
 }
