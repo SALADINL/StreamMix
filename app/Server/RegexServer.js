@@ -6,7 +6,7 @@ const HashMap = require('hashmap')
 const app = express();
 app.use(bodyParser.urlencoded({limit:'50mb',extended: true}));
 
-const listMusic = ['waka.mp3','fellgood.mp3', "babygirl.mp3"];
+const listMusic = ['waka.mp3','feelgood.mp3', "babygirl.mp3"];
 
 /** Fonction main, ctach un requête POST **/
 app.post('/', async function(req,res) {
@@ -26,7 +26,7 @@ app.post('/', async function(req,res) {
         } //else {if(running == null) {res.status(404).send('Aucune musique en cours');}}
 
         /** PAUSE **/
-        if(input.includes('pause')) {
+        if(input.includes('pause') || input.includes('relanc') || input.includes('remet')) {
             res.status(200).json({cmd:2}); //TODO a modifier
         }
 
@@ -46,7 +46,7 @@ app.post('/', async function(req,res) {
         //TODO trop chiant
 
         /** STOP **/
-         if(input.includes('arrête la musique')) {
+         if(input.includes('arrêt') || input.includes('stop')) {
             res.status(200).json({cmd:1});
          }
 

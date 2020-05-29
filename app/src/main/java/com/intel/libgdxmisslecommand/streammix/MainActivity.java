@@ -177,30 +177,6 @@ public class MainActivity extends AppCompatActivity implements CallbackServer {
                 if(_app != null) executeIce(response);
             }
         }
-/*        SweetAlertDialog sDialog = new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE);
-        sDialog.setTitleText("Response");
-        sDialog.setContentText(response);
-        sDialog.setConfirmText("Ok");
-        sDialog.setCancelable(false);
-        sDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener()
-        {
-            @Override
-            public void onClick(SweetAlertDialog sDialog) {
-                sDialog.dismissWithAnimation();
-            }
-        });
-        sDialog.show();*/
-
-
-
-        new Handler(Looper.getMainLooper()).post(new Runnable(){
-            @Override
-            public void run()
-            {
-
-
-            }
-        });
     }
 
     @Override
