@@ -1,0 +1,14 @@
+
+AppAdapter.Endpoints=tcp -p 12000:udp -p 12000:ssl -p 12001:ws -p 12002:wss -p 12003
+
+#
+# Only listen on the localhost interface by default.
+#
+Ice.Default.Host=localhost
+
+Ice.ThreadPool.Client.Size=1
+Ice.ThreadPool.Client.SizeMax=10
+Ice.ThreadPool.Server.Size=1
+Ice.ThreadPool.Server.SizeMax=10
+
+
