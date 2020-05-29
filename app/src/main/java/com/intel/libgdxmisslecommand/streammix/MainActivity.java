@@ -46,8 +46,6 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import java.io.File;
 import java.util.HashMap;
 
-import com.zeroc.Ice.LocalException;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -59,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements CallbackServer {
 
         private Context context = this;
         private ImageButton btnReco;
+        private TextView title_info;
         private ConstraintLayout mainLayout;
         private VideoView videoView;
         private ImageView info;
@@ -89,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements CallbackServer {
         checkPermissions();
 
         info = findViewById(R.id.info);
-        //videoView = findViewById(R.id.video);
+        title_info = findViewById(R.id.title);
         videoView = null;
         btnReco = findViewById(R.id.btn_reco);
         mainLayout = findViewById(R.id.mainLayout);
@@ -130,8 +129,11 @@ public class MainActivity extends AppCompatActivity implements CallbackServer {
 
 
                 TextView textView = new TextView(context);
-                textView.append("- Thunderstruck : ACDC \n" +
-                                "- Bohemian Rhapsody : Queen");
+                textView.append("- Waka-Waka \n" +
+                                "- Babygirl \n" +
+                                "- FeelGood \n\n" +
+                                " Auteur : \n" +
+                                "Léo Moracchioli");
                 textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
 
@@ -220,8 +222,8 @@ public class MainActivity extends AppCompatActivity implements CallbackServer {
         sDialog.show();
     }
 
-    private void initStream() {
-        String myUri = "http://192.168.43.194:3200/pika.mp3";
+    private void initStream(String music) {
+        String myUri = "http://192.168.43.194:3200/"+music;
             try {
                 BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
                 TrackSelector trackSelector = new DefaultTrackSelector(new AdaptiveTrackSelection.Factory(bandwidthMeter));
@@ -301,9 +303,25 @@ public class MainActivity extends AppCompatActivity implements CallbackServer {
                 case 0 : {
                     _app.addMusic(music);
                     _app.playMusic();
+                    title_info.setText(music);
+                    initStream(music);
                 }break;
-                case 1 : _app.removeMusic();break;
-                case 2 : _app.pauseMusic();break;
+                case 1 : {
+                    _app.removeMusic();
+                    title_info.setText("Aucune musique en cours");
+                }break;
+                case 2 : {
+                    _app.pauseMusic();
+
+                    String s = title_info.getText().toString();
+
+                    if(title_info.getText().toString().contains("(Pause)")) {
+                        s = s.substring(0, s.indexOf("("));
+                        title_info.setText(s);
+                    }else {
+                        title_info.setText(title_info.getText().toString().concat("(Pause)"));
+                    }
+                }break;
             }
     }
 }

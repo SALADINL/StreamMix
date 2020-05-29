@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class RequestServeur {
 
-    private static String URL = "http://192.168.42.194";
+    private static String URL = "http://192.168.43.194";
     public static String PORT_RECO = ":3211";
     public static String PORT_CMD = ":3212";
     private String URL_PORT = "";
@@ -52,7 +52,7 @@ public class RequestServeur {
             }
         };
 
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(5000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(10000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(stringRequest);
 
     }
